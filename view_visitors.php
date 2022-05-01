@@ -28,7 +28,8 @@ include_once("header.php");
 					<tbody>
 							<?php 
 								if (isset($_SESSION['myvisitors'])) {
-							
+								$session_id = ;
+								$ip_address = ;
 								$objvisitor = new MyVisitors;
 								$output = $objvisitor->getAllVisitors();
 								$counter = 0;

@@ -1,0 +1,5 @@
+<?php
+
+$JWT_SECRET = "26abef6566a83cacdca6a819e9ff8da08770a5a3f2cd3c698c18416637309285";
+
+
