@@ -2,39 +2,41 @@
 ob_start();
 ?>
 
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="keywords" content="project afrin, website design, ip address, php developer">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="project afrin, website design, ip address, php developer">
 	<meta name="description" content="Project Afrin is a test project to test my PHP skills">
 	<meta name="author" content="Mr. Kalio Tamunotonye">
-	<title>Project Afrin</title>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Home</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="main">
+        <div class= "navbar">
+            <div class="icon">
+                <a class="logo" href="register_home_page.html">
+                    <img src="logo.jpg" width="auto" height="50" /></a>
+            </div>
 
-	<div class="row">
-		<div class="col-2">
-			<div class="dropdown">
-			  <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-			    <i class="fa fa-bars"></i>
-			  </button>
-			  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-			    <a class="dropdown-item" id="home" href="index.php">Home</a>
-			    <a class="dropdown-item" id="about" href="#r10">About</a>
-			    <a class="dropdown-item" id="products" href="products.php">Products</a>
-			    <a class="dropdown-item" id="contact" href="#r10">Contact</a>
-			    <a class="dropdown-item" id="complaints" href="#r10">Complaints</a>
-			  </div>
-			</div>
-		</div>
+            <div class="menu">
+                <ul>
+                    <li><a href="#">HOME</a></li>
+                    <li><a href="#">COURSES</a></li>
+                    <li><a href="#">DEPARTMENT</a></li>
+                    <li><a href="#">SECTION</a></li>
+                    <li><a href="#">ENROLLMENT</a></li>
+                    <li><a href="#">CONTACT</a></li>
+                </ul>
+            </div>
 
-		<div class="col-10">
-			<h4>Project Afrin</h4>
-		</div>
-	</div>
+            <div class="search">
+                <input class="srch" type="search" name="" placeholder="Type To text">
+                <a href="#"><button class="btn">Search</button></a>
+            </div>
+        </div>
 
 
 
