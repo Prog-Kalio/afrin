@@ -17,13 +17,12 @@ include_once("header.php");
 				<table class="table table-striped table-bordered">
 					<thead>
 						<tr>
-							<th>S/N</th>
+							<th>Counter</th>
 							<th>IP Address</th>
 							<th>Device</th>
 							<th>Operating System</th>
 							<th>Browser</th>
-							<th>Created At</th>
-							<th>Updated At</th>
+							<th>Visited At</th>
 						</tr>
 					</thead>
 
@@ -37,11 +36,7 @@ include_once("header.php");
 							<td><?= UserInfo::get_device(); ?></td>
 							<td><?= UserInfo::get_os(); ?></td>
 							<td><?= UserInfo::get_browser(); ?></td>
-							<td><?php echo date('Y-m-d h:i:s', strtotime($value['created_at'])); ?></td>
-							<td><?php echo date('Y-m-d h:i:s', strtotime($value['updated_at'])); ?></td>
-							<td>
-								<a href="delete.php"><i class="fa fa-trash"></i></a>
-							</td>
+							<td><?php $tm = time(); echo date('m/d/y', $tm); ?></td>
 						</tr>
 
 					</tbody>
