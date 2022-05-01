@@ -1,7 +1,33 @@
 <?php session_start();
 include_once("classes.php");
-include_once("header.php");
+include_once("myheader.php");
+if (!isset($_SESSION['session_id'])) {
+	$_SESSION['session_id'] = time().rand();
+}
+if (!isset($_SESSION['ip_address'])) {
+	$_SESSION['ip_address'] = UserInfo::get_ip();
+}
+if (!isset($_SESSION['device'])) {
+	$_SESSION['device'] = UserInfo::get_device();
+}
+if (!isset($_SESSION['operating_system'])) {
+	$_SESSION['operating_system'] = UserInfo::get_os();
+}
+if (!isset($_SESSION['browser'])) {
+	$_SESSION['browser'] = UserInfo::get_browser();
+}
+if(!isset($_SESSION['url'])) {
+  $_SESSION['url'] = $_SERVER['REQUEST_URI'];
+}
 
+$object = new MyVisitors;
+$_SESSION['session_id'] = time().rand();
+$_SESSION['ip_address'] = UserInfo::get_ip();
+$_SESSION['device'] = UserInfo::get_device();
+$_SESSION['operating_system'] = UserInfo::get_os();
+$_SESSION['browser'] = UserInfo::get_browser();
+$_SESSION['url'] = $_SERVER['REQUEST_URI'];
+$output = $object->addToAfrin($_SESSION['session_id'], $_SESSION['ip_address'], $_SESSION['device'], $_SESSION['operating_system'], $_SESSION['browser'], $_SESSION['url']);
 ?>
 
 
@@ -18,28 +44,41 @@ include_once("header.php");
 					<thead>
 						<tr>
 							<th>Counter</th>
+							<th>Session ID</th>
 							<th>IP Address</th>
 							<th>Device</th>
 							<th>Operating System</th>
 							<th>Browser</th>
+							<th>Page Visited</th>
 							<th>Visited At</th>
 						</tr>
 					</thead>
 
 					<tbody>
-							<?php 
-								$counter = 0;
-							?>
-						<tr>
-							<td><?php echo ++$counter; ?></td>
-							<td><?= UserInfo::get_ip(); ?></td>
-							<td><?= UserInfo::get_device(); ?></td>
-							<td><?= UserInfo::get_os(); ?></td>
-							<td><?= UserInfo::get_browser(); ?></td>
-							<td><?php $tm = time(); echo date('m/d/y', $tm); ?></td>
-						</tr>
+					<?php 
 
-					</tbody>
+						$object = new MyVisitors;
+						$output = $object->getAllVisitors();
+						 $counter = 0;
+						foreach ($output as $key => $value) {
+
+					?>
+				<tr>
+					<td><?php echo ++$counter; ?></td>
+					<td><?php echo $value['session_id']; ?></td>
+					<td><?php echo $value['ip_address']; ?></td>
+					<td><?php echo $value['device']; ?></td>
+					<td><?php echo $value['operating_system']; ?></td>
+					<td><?php echo $value['browser']; ?></td>
+					<td><?php echo $value['url']; ?></td>
+					<td><?php echo date('Y-m-d h:i:s', strtotime($value['visited_at'])); ?></td>
+				</tr>
+
+					<?php 
+						
+						}	
+					?>
+			</tbody>
 				</table>
 			</div>
 
@@ -48,5 +87,3 @@ include_once("header.php");
 	</div>
 </div>
 
-
-<?php include_once("footer.php") ?>

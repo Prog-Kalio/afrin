@@ -17,6 +17,10 @@ include_once("constants.php");
 
 		public $session_id; 
 		public $ip_address;
+		public $device;
+		public $operating_system;
+		public $browser;
+		public $url;
 		public $dbcon; //database connection handler
 
 
@@ -34,14 +38,21 @@ include_once("constants.php");
 
 
 
-		function addToAfrin($session_id, $ip_address) {
+		function addToAfrin($session_id, $ip_address, $device, $operating_system, $browser, $url) {
 			
-		$sql = "INSERT INTO afrin(session_id, ip_address) VALUES('$session_id', 'ip_address')";
+		$sql = "INSERT INTO afrin(session_id, ip_address, device, operating_system, browser, url) VALUES('$session_id', '$ip_address', '$device', '$operating_system', '$browser', '$url')";
 
 		// check result
 		$result = $this->dbcon->query($sql);
 
 			if ($this->dbcon->affected_rows == 1) {
+				// create variables
+				$_SESSION['session_id'] = time().rand();
+				$_SESSION['ip_address'] = UserInfo::get_ip();
+				$_SESSION['device'] = UserInfo::get_device();
+				$_SESSION['operating_system'] = UserInfo::get_os();
+				$_SESSION['browser'] = UserInfo::get_browser();
+				$_SESSION['url'] = $_SERVER['REQUEST_URI'];
 				return true;
 			}
 			else {
@@ -52,8 +63,8 @@ include_once("constants.php");
 
 
 		// Get all Users information
-		function getFromAfrin($session_id) {
-			$sql = "SELECT * FROM afrin WHERE session_id = '$session_id'";
+		function getFromAfrin($url) {
+			$sql = "SELECT * FROM afrin WHERE url = '$url'";
 
 			$result = $this->dbcon->query($sql);
 			$rows = array();

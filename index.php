@@ -1,15 +1,33 @@
 <?php session_start();
-include_once("header.php");
 include_once("classes.php");
-
-// pick session ID
-if (!isset($_SESSION['myvisitors'])) {
-	$_SESSION['myvisitors'] = time().rand(); 
+include_once("header.php");
+if (!isset($_SESSION['session_id'])) {
+	$_SESSION['session_id'] = time().rand();
+}
+if (!isset($_SESSION['ip_address'])) {
+	$_SESSION['ip_address'] = UserInfo::get_ip();
+}
+if (!isset($_SESSION['device'])) {
+	$_SESSION['device'] = UserInfo::get_device();
+}
+if (!isset($_SESSION['operating_system'])) {
+	$_SESSION['operating_system'] = UserInfo::get_os();
+}
+if (!isset($_SESSION['browser'])) {
+	$_SESSION['browser'] = UserInfo::get_browser();
+}
+if(!isset($_SESSION['url'])) {
+  $_SESSION['url'] = $_SERVER['REQUEST_URI'];
 }
 
-// Pick IP address
-if (!isset($_SESSION['ip_address']))
-	$_SESSION['ip_address'] = $_SERVER['HTTP_CLIENT_IP'];
+$object = new MyVisitors;
+$_SESSION['session_id'] = time().rand();
+$_SESSION['ip_address'] = UserInfo::get_ip();
+$_SESSION['device'] = UserInfo::get_device();
+$_SESSION['operating_system'] = UserInfo::get_os();
+$_SESSION['browser'] = UserInfo::get_browser();
+$_SESSION['url'] = $_SERVER['REQUEST_URI'];
+$output = $object->addToAfrin($_SESSION['session_id'], $_SESSION['ip_address'], $_SESSION['device'], $_SESSION['operating_system'], $_SESSION['browser'], $_SESSION['url']);
 ?>
 
 <!-- Main Content -->
